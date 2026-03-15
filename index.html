@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- SDK DO FIREBASE -->
+    <!-- SDK DO FIREBASE (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -28,7 +28,7 @@
         html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; background-color: var(--cinza-fundo); font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
-        /* --- PERFIL --- */
+        /* --- BOTÃO PERFIL --- */
         .profile-trigger {
             position: absolute; top: 20px; right: 20px;
             width: 45px; height: 45px; background: #111;
@@ -66,7 +66,7 @@
         .cat-card span { font-size: 11px; font-weight: 700; color: #444; }
         .cat-card.active span { color: var(--roxo-neon); }
 
-        /* --- FILTRO (FIXED) --- */
+        /* --- FILTRO --- */
         .price-filter { width: 90%; max-width: 450px; margin: 10px auto 40px; padding: 30px 25px; background: #fff; border-radius: 20px; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
         .price-filter label { font-size: 10px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 35px; }
         .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; background: #eee; border-radius: 10px; outline: none; margin: 0; }
@@ -88,9 +88,9 @@
         .btn-remove-adm { display: none; background:none; border:none; color:#ff4d4d; font-size:9px; margin-top:10px; cursor:pointer; width:100%; font-weight: bold; }
         body.is-admin .btn-remove-adm { display: block; }
         .terms-notice { font-size: 8px; color: #aaa; text-align: center; margin-top: 5px; font-weight: 600; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .item-card:hover .terms-notice { opacity: 1; visibility: visible; }
+        .item-card:hover .terms-notice, .item-card:active .terms-notice { opacity: 1; visibility: visible; }
 
-        /* --- TELAS --- */
+        /* --- CONTA --- */
         .auth-card { width: 90%; max-width: 400px; background: #fff; padding: 40px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; text-align: center; }
         .auth-card input { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd; font-family: 'Poppins'; }
         .btn-auth { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--roxo-neon); color: #fff; font-weight: 800; cursor: pointer; }
@@ -99,20 +99,182 @@
         /* --- SOBRE NÓS --- */
         .about-page { width: 92%; max-width: 800px; margin: 40px auto 100px; }
         .about-box { background: #fff; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #eee; }
-        .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; margin-bottom: 20px; text-transform: uppercase; }
+        .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; margin-bottom: 20px; text-transform: uppercase; text-shadow: 0 0 10px var(--roxo-glow); }
         .premium-title { font-family: 'Poppins'; font-size: 20px; font-weight: 800; color: #111; margin: 60px 0 25px; padding-left: 15px; border-left: 6px solid var(--roxo-neon); text-transform: uppercase; text-align: left; }
-        .premium-card { background: #fff; padding: 25px; border-radius: 18px; border: 1px solid #eee; text-align: left; margin-bottom: 15px; }
+        .premium-card { background: #fff; padding: 25px; border-radius: 18px; border: 1px solid #eee; text-align: left; margin-bottom: 15px; transition: 0.3s; }
+        .premium-card:hover { border-color: var(--roxo-neon); box-shadow: 0 0 15px var(--roxo-glow); transform: translateY(-3px); }
 
         /* --- ADM --- */
         .admin-box { width: 90%; max-width: 500px; background: #fff; padding: 30px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; }
         .admin-form input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins'; }
         .btn-admin { width: 100%; padding: 15px; background: var(--preto-fundo); color: #fff; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; }
 
-        /* --- BOTÕES FLUTUANTES --- */
+        /* --- CONTATOS --- */
         .float-contact { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 15px; z-index: 999; }
         .btn-wrapper { position: relative; display: flex; align-items: center; }
         .btn-contact { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; cursor: pointer; }
         .btn-contact.whatsapp { background-color: var(--whatsapp); }
+        .btn-contact.discord { background-color: var(--discord); }
+        .custom-tooltip { position: absolute; right: 70px; background: #111; color: #fff; padding: 10px 18px; border-radius: 12px; font-size: 12px; font-weight: 700; white-space: nowrap; border: 1px solid var(--roxo-neon); opacity: 0; visibility: hidden; transition: 0.3s ease; pointer-events: none; }
+        .show-tooltip .custom-tooltip { opacity: 1; visibility: visible; transform: translateX(0); }
+
+        footer { text-align: center; padding: 60px 0; color: #ccc; font-size: 10px; letter-spacing: 1px; width: 100%; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div id="btn-profile-top" class="profile-trigger"><i class="fa fa-user-circle"></i></div>
+        <nav id="main-nav">
+            <a data-target="section-loja" class="nav-btn active">Loja</a>
+            <a data-target="section-feedback" class="nav-btn">Feedbacks</a>
+            <a data-target="section-sobre" class="nav-btn">Sobre Nós</a>
+            <a id="nav-adm" data-target="section-adm" style="display: none; color: #fff; font-weight: 800;">ADM 🔒</a>
+        </nav>
+        <h1 class="logo-main">MANGA <span>STORE</span></h1>
+        <div class="logo-sub">Volleyball legends, Lucky Spin e diversos</div>
+        <div class="search-box"><i class="fa fa-search"></i><input type="text" id="searchInput" placeholder="Buscar produtos..."></div>
+    </header>
+
+    <!-- LOJA -->
+    <div id="section-loja" class="section-content">
+        <div class="categories-wrapper">
+            <div class="categories-container">
+                <div class="cat-card active" data-category="all"><span>✨ All</span></div>
+                <div class="cat-card" data-category="estilos"><span>👑 Estilos</span></div>
+                <div class="cat-card" data-category="robux"><span>💎 Robux</span></div>
+                <div class="cat-card" data-category="lucky"><span>🌀 Lucky Spin</span></div>
+                <div class="cat-card" data-category="slots"><span>🎰 Slots</span></div>
+            </div>
+        </div>
+        <div class="price-filter">
+            <label>Defina seu orçamento</label>
+            <input type="range" min="0" max="1000" value="500" class="slider" id="priceRange">
+            <span class="price-range-text" id="filterLabel">Arraste para filtrar por valor</span>
+        </div>
+        <div class="product-grid" id="productContainer">
+             <p style="color: #bbb; grid-column: 1/-1; text-align: center;">Carregando produtos...</p>
+        </div>
+    </div>
+
+    <!-- CONTA -->
+    <div id="section-auth" class="section-content page-hidden">
+        <div class="auth-card" id="auth-forms">
+            <h2>Minha Conta</h2>
+            <input type="email" id="user-email" placeholder="E-mail">
+            <input type="password" id="user-pass" placeholder="Senha">
+            <button class="btn-auth" onclick="handleAuth()">ENTRAR / CADASTRAR</button>
+            <button class="btn-google-icon" onclick="loginWithGoogle()"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24"></button>
+        </div>
+        <div class="auth-card page-hidden" id="user-profile">
+            <h2 id="display-user-name">Usuário</h2>
+            <button class="btn-auth" style="background:#ff4d4d; margin-top: 20px;" onclick="logout()">SAIR DA CONTA</button>
+        </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div id="section-feedback" class="section-content page-hidden">
+        <div class="admin-box">
+            <h3 style="text-align: center; margin-bottom: 15px;">Avalie sua compra</h3>
+            <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px; color:#ddd; font-size:20px;" id="starRating">
+                <i class="fa fa-star" data-v="1"></i><i class="fa fa-star" data-v="2"></i><i class="fa fa-star" data-v="3"></i><i class="fa fa-star" data-v="4"></i><i class="fa fa-star" data-v="5"></i>
+            </div>
+            <textarea id="fbComment" placeholder="Comente aqui..."></textarea>
+            <button class="btn-admin" onclick="sendFeedback()">ENVIAR FEEDBACK</button>
+        </div>
+        <div class="product-grid" id="feedbackList"></div>
+    </div>
+
+    <!-- ADM -->
+    <div id="section-adm" class="section-content page-hidden">
+        <div class="admin-box">
+            <h2>Gerenciar Loja</h2>
+            <div class="admin-form">
+                <input type="text" id="newProdName" placeholder="Nome">
+                <input type="number" id="newProdPrice" placeholder="Preço">
+                <select id="newProdCat">
+                    <option value="estilos">Estilos</option><option value="robux">Robux</option><option value="lucky">Lucky Spin</option><option value="slots">Slots</option>
+                </select>
+                <input type="text" id="newProdImg" placeholder="Link da Foto">
+                <input type="text" id="newProdStatus" placeholder="Status (Ex: 10 disponíveis)">
+                <button class="btn-admin" onclick="saveToDatabase()">SALVAR NO BANCO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOBRE -->
+    <div id="section-sobre" class="section-content page-hidden">
+        <div class="about-page">
+            <div class="about-box"><h2>Manga Store</h2><p>Liderança e segurança no Volleyball Legends.</p></div>
+            <div class="premium-title">📜 Compromisso & Diretrizes</div>
+            <div class="product-grid" style="grid-template-columns: 1fr;">
+                <div class="premium-card"><h4>Propriedade</h4><p>Itens digitais exclusivos. Ao comprar, você aceita nossos termos.</p></div>
+                <div class="premium-card"><h4>Reembolsos</h4><p>Não aceitamos reembolsos após entrega do item.</p></div>
+            </div>
+            <div class="premium-title">❓ Dúvidas Frequentes</div>
+            <div class="premium-card"><h4>Pagamento</h4><p>Aceitamos apenas PIX no momento para rapidez total.</p></div>
+        </div>
+    </div>
+
+    <div class="float-contact">
+        <div class="btn-wrapper"><div class="custom-tooltip">Ir para Discord</div><a href="https://discord.gg/bgrFPFAX4" target="_blank" class="btn-contact discord"><i class="fab fa-discord"></i></a></div>
+        <div class="btn-wrapper"><div class="custom-tooltip">Suporte WhatsApp</div><a href="https://wa.me/5573981822034" target="_blank" class="btn-contact whatsapp"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <footer>MANGA STORE • O IMPÉRIO DO VBL • 2026</footer>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJpXVl5K_qA-NR3lQQiG9MckonlX9Ds-8",
+            authDomain: "manga-store-5877c.firebaseapp.com",
+            databaseURL: "https://manga-store-5877c-default-rtdb.firebaseio.com",
+            projectId: "manga-store-5877c",
+            storageBucket: "manga-store-5877c.firebasestorage.app",
+            messagingSenderId: "855940003501",
+            appId: "1:855940003501:web:8fbb9c140bcc7236393824"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const auth = firebase.auth();
+
+        const ADMIN_EMAIL = "manjmangoo@gmail.com";
+        let isPriceActive = false, currentCategory = "all";
+
+        function switchPage(targetId) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.add('page-hidden'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            const targetSection = document.getElementById(targetId);
+            if(targetSection) targetSection.classList.remove('page-hidden');
+            const targetBtn = document.querySelector(`[data-target="${targetId}"]`);
+            if(targetBtn) targetBtn.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.onclick = () => switchPage(btn.getAttribute('data-target')));
+        document.getElementById('btn-profile-top').onclick = () => switchPage('section-auth');
+
+        function loginWithGoogle() { auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()); }
+        function handleAuth() {
+            const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
+            if(!e || !p) return alert("Preencha tudo!");
+            auth.signInWithEmailAndPassword(e, p).catch(() => auth.createUserWithEmailAndPassword(e,p));
+        }
+        function logout() { auth.signOut(); switchPage('section-loja'); }
+
+        auth.onAuthStateChanged(user => {
+            const profileIcon = document.getElementById('btn-profile-top'), welcomeText = document.getElementById('display-user-name');
+            if(user) {
+                profileIcon.innerHTML = user.photoURL ? `<img src="${user.photoURL}">` : `<i class="fa fa-user-check"></i>`;
+                document.getElementById('auth-forms').classList.add('page-hidden');
+                document.getElementById('user-profile').classList.remove('page-hidden');
+                if(user.email === ADMIN_EMAIL) { welcomeText.innerText = "ADM"; document.getElementById('nav-adm').style.display = "block"; document.body.classList.add('is-admin'); }
+                else welcomeText.innerText = user.displayName || user.email.split('@')[0];
+            } else {
+                profileIcon.innerHTML = `<i class="fa fa-user-circle"></i>`;
+                document.getElementById('auth-forms').classList.remove('page-hidden');
+                document.getElementById('user-profile').classList.add('page-hidden');
+                document.getElementById('nav-adm').style.displaatsapp { background-color: var(--whatsapp); }
         .btn-contact.discord { background-color: var(--discord); }
         .custom-tooltip { position: absolute; right: 70px; background: #111; color: #fff; padding: 10px 18px; border-radius: 12px; font-size: 12px; font-weight: 700; white-space: nowrap; border: 1px solid var(--roxo-neon); opacity: 0; visibility: hidden; transition: 0.3s ease; pointer-events: none; }
         .show-tooltip .custom-tooltip { opacity: 1; visibility: visible; transform: translateX(0); }
