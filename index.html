@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Manga Store | Premium</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- SDK DO FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <style>
+        :root { 
+            --roxo-neon: #bc13fe; 
+            --roxo-glow: rgba(188, 19, 254, 0.4);
+            --preto-fundo: #0a0a0a; 
+            --cinza-fundo: #f9f9fb;
+            --whatsapp: #25D366;
+            --discord: #5865F2;
+        }
+
+        * { box-sizing: border-box; outline: none; }
+        html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; background-color: var(--cinza-fundo); font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+        .profile-trigger { position: absolute; top: 20px; right: 20px; width: 45px; height: 45px; background: #111; border-radius: 50%; border: 1px solid var(--roxo-neon); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 0 10px var(--roxo-glow); z-index: 1000; overflow: hidden; }
+        .profile-trigger img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-trigger i { color: #fff; font-size: 18px; }
+
+        header { background: var(--preto-fundo); padding: 25px 0 40px; text-align: center; width: 100%; border-bottom: 1px solid #222; position: relative; }
+        nav { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
+        nav a { color: #555; text-decoration: none; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
+        nav a.active { color: var(--roxo-neon); text-shadow: 0 0 10px var(--roxo-neon); }
+
+        .logo-main { font-family: 'Playfair Display', serif; font-size: 38px; color: #fff; text-transform: uppercase; margin: 0; }
+        .logo-main span { color: var(--roxo-neon); text-shadow: 0 0 15px var(--roxo-neon); animation: neonPulse 2s infinite ease-in-out; }
+        .logo-sub { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; margin-top: 10px; font-weight: 700; display: block; }
+        @keyframes neonPulse { 0%, 100% { text-shadow: 0 0 15px var(--roxo-neon); opacity: 1; } 50% { text-shadow: 0 0 5px var(--roxo-neon); opacity: 0.8; } }
+
+        .search-box { width: 90%; max-width: 450px; margin: 20px auto 0; position: relative; }
+        .search-box input { width: 100%; padding: 12px 20px 12px 40px; border-radius: 12px; border: 1px solid #eee; background: #fff; font-size: 13px; font-family: 'Poppins'; }
+        .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #bbb; }
+
+        .section-content { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .page-hidden { display: none !important; }
+
+        /* --- CATEGORIAS --- */
+        .categories-wrapper { width: 100%; overflow-x: auto; display: flex; padding: 25px 0; scrollbar-width: none; }
+        .categories-wrapper::-webkit-scrollbar { display: none; }
+        .categories-container { display: flex; gap: 15px; padding: 0 20px; margin: 0 auto; }
+        .cat-card { background: #fff; padding: 14px 22px; border-radius: 12px; min-width: 100px; text-align: center; cursor: pointer; border: 1px solid #eee; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.3s; }
+        .cat-card.active { border-color: var(--roxo-neon); box-shadow: 0 0 20px var(--roxo-neon); }
+        .cat-card span { font-size: 11px; font-weight: 700; color: #444; }
+
+        /* --- FILTRO (REFORÇADO) --- */
+        .price-filter { width: 90%; max-width: 450px; margin: 10px auto 40px; padding: 30px 25px; background: #fff; border-radius: 20px; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .price-filter label { font-size: 10px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 35px; }
+        
+        /* BARRINHA FIXADA */
+        .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #eee; border-radius: 10px; outline: none; margin: 0; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
+        .slider::-moz-range-thumb { width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
+        .price-range-text { font-size: 15px; font-weight: 800; color: var(--roxo-neon); margin-top: 25px; }
+
+        /* --- PRODUTOS --- */
+        .product-grid { width: 92%; max-width: 1000px; margin-bottom: 100px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; }
+        .item-card { background: #fff; border-radius: 18px; padding: 20px; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.02); animation: fadeIn 0.5s ease forwards; transition: 0.3s; display: flex; flex-direction: column; gap: 15px; }
+        .item-card:hover { transform: translateY(-5px); border-color: var(--roxo-neon); }
+        .item-hidden { display: none !important; }
+        .card-main-info { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .info-left h3 { margin: 5px 0; font-size: 16px; font-weight: 700; color: #111; }
+        .price-tag { font-size: 20px; font-weight: 700; color: #000; display: block; margin-top: 5px; }
+        .delivery { font-size: 11px; color: #27ae60; font-weight: 700; margin-top: 5px; }
+        .info-right img { width: 80px; height: 80px; border-radius: 12px; background: #f4f4f4; object-fit: cover; border: 1px solid #eee; }
+        .btn-buy-card { width: 100%; padding: 12px; border-radius: 10px; background: var(--roxo-neon); color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .btn-remove-adm { display: none; background:none; border:none; color:#ff4d4d; font-size:9px; margin-top:10px; cursor:pointer; width:100%; font-weight: bold; }
+        body.is-admin .btn-remove-adm { display: block; }
+        .terms-notice { font-size: 8px; color: #aaa; text-align: center; margin-top: 5px; font-weight: 600; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .item-card:hover .terms-notice { opacity: 1; visibility: visible; }
+
+        /* --- CONTA --- */
+        .auth-card { width: 90%; max-width: 400px; background: #fff; padding: 40px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .auth-card h2 { font-family: 'Playfair Display'; color: #111; margin-bottom: 25px; font-size: 26px; }
+        .auth-card input { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd; font-family: 'Poppins'; }
+        .btn-auth { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--roxo-neon); color: #fff; font-weight: 800; cursor: pointer; box-shadow: 0 5px 15px var(--roxo-glow); }
+        .btn-google-icon { width: 55px; height: 55px; margin: 25px auto 0; border-radius: 50%; border: 1px solid #eee; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+        .auth-toggle { margin-top: 25px; font-size: 13px; color: #888; cursor: pointer; }
+        .auth-toggle b { color: var(--roxo-neon); }
+
+        /* --- SOBRE NÓS --- */
+        .about-page { width: 92%; max-width: 800px; margin: 40px auto 100px; }
+        .about-box { background: #fff; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; text-shadow: 0 0 10px var(--roxo-glow); margin-bottom: 20px; text-transform: uppercase; }
+        .premium-title { font-family: 'Poppins'; font-size: 22px; font-weight: 800; color: #111; margin: 60px 0 30px; padding-left: 15px; border-left: 6px solid var(--roxo-neon); text-transform: uppercase; text-align: left; }
+        .premium-card { background: #fff; padding: 25px; border-radius: 18px; border: 1px solid #eee; text-align: left; margin-bottom: 15px; }
+
+        /* --- ADM --- */
+        .admin-box { width: 90%; max-width: 500px; background: #fff; padding: 30px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; }
+        .admin-form input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins'; }
+        .btn-admin { width: 100%; padding: 15px; background: var(--preto-fundo); color: #fff; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; }
+
+        .float-contact { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 15px; z-index: 999; }
+        .btn-wrapper { position: relative; display: flex; align-items: center; }
+        .btn-contact { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; cursor: pointer; }
+        .btn-contact.whatsapp { background-color: var(--whatsapp); }
+        .btn-contact.discord { background-color: var(--discord); }
+        .custom-tooltip { position: absolute; right: 70px; background: #111; color: #fff; padding: 10px 18px; border-radius: 12px; font-size: 12px; font-weight: 700; white-space: nowrap; border: 1px solid var(--roxo-neon); opacity: 0; visibility: hidden; transition: 0.3s ease; pointer-events: none; }
+        .show-tooltip .custom-tooltip { opacity: 1; visibility: visible; transform: translateX(0); }
+
+        footer { text-align: center; padding: 60px 0; color: #ccc; font-size: 10px; letter-spacing: 1px; width: 100%; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div id="btn-profile-top" class="profile-trigger"><i class="fa fa-user-circle"></i></div>
+        <nav>
+            <a id="nav-loja" class="active">Loja</a>
+            <a id="nav-feedback">Feedbacks</a>
+            <a id="nav-sobre">Sobre Nós</a>
+            <a id="nav-adm" style="display: none; color: #fff; font-weight: 800;">ADM 🔒</a>
+        </nav>
+        <h1 class="logo-main">MANGA <span>STORE</span></h1>
+        <div class="logo-sub">Volleyball legends, Lucky Spin e diversos</div>
+        <div class="search-box"><i class="fa fa-search"></i><input type="text" id="searchInput" placeholder="Buscar produtos..."></div>
+    </header>
+
+    <!-- LOJA -->
+    <div id="section-loja" class="section-content">
+        <div class="categories-wrapper">
+            <div class="categories-container">
+                <div class="cat-card active" data-category="all"><span>✨ All</span></div>
+                <div class="cat-card" data-category="estilos"><span>👑 Estilos</span></div>
+                <div class="cat-card" data-category="robux"><span>💎 Robux</span></div>
+                <div class="cat-card" data-category="lucky"><span>🌀 Lucky Spin</span></div>
+                <div class="cat-card" data-category="slots"><span>🎰 Slots</span></div>
+            </div>
+        </div>
+        <div class="price-filter">
+            <label>Defina seu orçamento</label>
+            <input type="range" min="0" max="1000" value="1000" class="slider" id="priceRange">
+            <span class="price-range-text" id="filterLabel">Arraste para filtrar por valor</span>
+        </div>
+        <div class="product-grid" id="productContainer"></div>
+    </div>
+
+    <!-- CONTA -->
+    <div id="section-auth" class="section-content page-hidden">
+        <div class="auth-card" id="auth-forms">
+            <h2>Minha Conta</h2>
+            <input type="email" id="user-email" placeholder="E-mail">
+            <input type="password" id="user-pass" placeholder="Senha">
+            <button class="btn-auth" id="btn-auth-action" onclick="handleAuth()">ENTRAR</button>
+            <button class="btn-google-icon" onclick="loginWithGoogle()" title="Entrar com Google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+            </button>
+            <div class="auth-toggle" onclick="toggleAuthMode()">Não tem conta? <b>Crie agora</b></div>
+        </div>
+        <div class="auth-card page-hidden" id="user-profile">
+            <h2>Olá, <span id="display-user-name">...</span></h2>
+            <p style="color: #888; font-size: 13px; margin-bottom: 25px;">Sessão ativa na Manga Store.</p>
+            <button class="btn-auth" style="background:#ff4d4d; box-shadow: none;" onclick="logout()">SAIR DA CONTA</button>
+        </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div id="section-feedback" class="section-content page-hidden">
+        <div class="admin-box">
+            <h3 style="text-align: center; margin-bottom: 15px;">Avalie sua compra</h3>
+            <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px; color:#ddd; font-size:20px;" id="starRating">
+                <i class="fa fa-star" data-v="1"></i><i class="fa fa-star" data-v="2"></i><i class="fa fa-star" data-v="3"></i><i class="fa fa-star" data-v="4"></i><i class="fa fa-star" data-v="5"></i>
+            </div>
+            <textarea id="fbComment" placeholder="Comente aqui..."></textarea>
+            <button class="btn-admin" onclick="sendFeedback()">ENVIAR FEEDBACK</button>
+        </div>
+        <div class="product-grid" id="feedbackList"></div>
+    </div>
+
+    <!-- ADM -->
+    <div id="section-adm" class="section-content page-hidden">
+        <div class="admin-box">
+            <h2>Gerenciar Loja</h2>
+            <div class="admin-form">
+                <input type="text" id="newProdName" placeholder="Nome">
+                <input type="number" id="newProdPrice" placeholder="Preço">
+                <select id="newProdCat">
+                    <option value="estilos">Estilos</option><option value="robux">Robux</option><option value="lucky">Lucky Spin</option><option value="slots">Slots</option>
+                </select>
+                <input type="text" id="newProdImg" placeholder="Link da Foto">
+                <input type="text" id="newProdStatus" placeholder="Status (Ex: Disponível)">
+                <button class="btn-admin" onclick="saveToDatabase()">SALVAR NO BANCO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOBRE -->
+    <div id="section-sobre" class="section-content page-hidden">
+        <div class="about-page">
+            <div class="about-box"><h2>Manga Store</h2><p>Segurança e qualidade premium no VBL.</p></div>
+            <div class="premium-title">Compromisso & Diretrizes</div>
+            <div class="premium-card"><h4>Entrega</h4><p>Entrega rápida via suporte especializado.</p></div>
+            <div class="premium-title">Dúvidas Frequentes</div>
+            <div class="premium-card"><h4>Pagamento</h4><p>Aceitamos apenas PIX no momento.</p></div>
+        </div>
+    </div>
+
+    <div class="float-contact">
+        <div class="btn-wrapper"><div class="custom-tooltip">Discord</div><a href="https://discord.gg/bgrFPFAX4" target="_blank" class="btn-contact discord"><i class="fab fa-discord"></i></a></div>
+        <div class="btn-wrapper"><div class="custom-tooltip">WhatsApp</div><a href="https://wa.me/5573981822034" target="_blank" class="btn-contact whatsapp"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <footer>MANGA STORE • O IMPÉRIO DO VBL • 2026</footer>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJpXVl5K_qA-NR3lQQiG9MckonlX9Ds-8",
+            authDomain: "manga-store-5877c.firebaseapp.com",
+            databaseURL: "https://manga-store-5877c-default-rtdb.firebaseio.com",
+            projectId: "manga-store-5877c",
+            storageBucket: "manga-store-5877c.firebasestorage.app",
+            messagingSenderId: "855940003501",
+            appId: "1:855940003501:web:8fbb9c140bcc7236393824"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const auth = firebase.auth();
+
+        const ADMIN_EMAIL = "manjmangoo@gmail.com";
+        let isLoginMode = true;
+        let isPriceActive = false;
+
+        function loginWithGoogle() { auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(e => alert(e.message)); }
+        function handleAuth() {
+            const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
+            if(!e || !p) return alert("Preencha tudo!");
+            if(isLoginMode) auth.signInWithEmailAndPassword(e, p).catch(err => alert(err.message));
+            else auth.createUserWithEmailAndPassword(e, p).then(() => alert("Conta Criada!")).catch(err => alert(err.message));
+        }
+        function logout() { auth.signOut(); switchPage(0); }
+
+        auth.onAuthStateChanged(user => {
+            const profileIcon = document.getElementById('btn-profile-top');
+            const welcomeText = document.getElementById('display-user-name');
+            if(user) {
+                profileIcon.innerHTML = user.photoURL ? `<img src="${user.photoURL}">` : `<i class="fa fa-user-check"></i>`;
+                document.getElementById('auth-forms').classList.add('page-hidden');
+                document.getElementById('user-profile').classList.remove('page-hidden');
+                if(user.email === ADMIN_EMAIL) { welcomeText.innerText = "ADM"; document.getElementById('nav-adm').style.display = "block"; document.body.classList.add('is-admin'); }
+                else { welcomeText.innerText = user.displayName || user.email.split('@')[0]; }
+            } else {
+                profileIcon.innerHTML = `<i class="fa fa-user-circle"></i>`;
+                document.getElementById('auth-forms').classList.remove('page-hidden');
+                document.getElementById('user-profile').classList.add('page-hidden');
+                document.getElementById('nav-adm').style.display = "none";
+                document.body.classList.remove('is-admin');
+            }
+        });
+
+        db.ref('produtos').on('value', snap => {
+            const container = document.getElementById("productContainer"); container.innerHTML = "";
+            snap.forEach(child => {
+                const p = child.val(), key = child.key;
+                const card = document.createElement("div"); card.className = "item-card";
+                card.setAttribute("data-price", p.price); card.setAttribute("data-cat", p.cat);
+                card.innerHTML = `<div class="card-main-info"><div class="info-left"><h3>${p.name}</h3><span class="price-tag">R$ ${p.price},00</span><div class="delivery">⚡ ${p.status}</div></div><div class="info-right"><img src="${p.img}"></div></div><div class="terms-notice">Ao comprar, você concorda com nosso
