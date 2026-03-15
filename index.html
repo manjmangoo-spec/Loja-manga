@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Manga Store | Premium</title>
     
-    <!-- Fontes e Ícones -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -61,16 +60,18 @@
         .categories-wrapper { width: 100%; overflow-x: auto; display: flex; padding: 25px 0; scrollbar-width: none; }
         .categories-wrapper::-webkit-scrollbar { display: none; }
         .categories-container { display: flex; gap: 15px; padding: 0 20px; margin: 0 auto; }
-        .cat-card { background: #fff; padding: 14px 22px; border-radius: 12px; min-width: 110px; text-align: center; cursor: pointer; border: 1px solid #eee; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.3s; }
+        .cat-card { background: #fff; padding: 14px 22px; border-radius: 12px; min-width: 100px; text-align: center; cursor: pointer; border: 1px solid #eee; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.3s; }
         .cat-card.active { border-color: var(--roxo-neon); box-shadow: 0 0 20px var(--roxo-neon); }
         .cat-card span { font-size: 11px; font-weight: 700; color: #444; }
 
-        /* --- FILTRO --- */
+        /* --- FILTRO (CORREÇÃO DE BUG AZUL) --- */
         .price-filter { width: 90%; max-width: 450px; margin: 10px auto 40px; padding: 30px 25px; background: #fff; border-radius: 20px; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
         .price-filter label { font-size: 10px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 35px; }
+        
         .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #eee; border-radius: 10px; outline: none; margin: 0; }
         .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
         .slider::-moz-range-thumb { width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
+        
         .price-range-text { font-size: 15px; font-weight: 800; color: var(--roxo-neon); margin-top: 25px; }
 
         /* --- PRODUTOS --- */
@@ -87,7 +88,7 @@
         .btn-remove-adm { display: none; background:none; border:none; color:#ff4d4d; font-size:9px; margin-top:10px; cursor:pointer; width:100%; font-weight: bold; }
         body.is-admin .btn-remove-adm { display: block; }
         .terms-notice { font-size: 8px; color: #aaa; text-align: center; margin-top: 5px; font-weight: 600; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .item-card:hover .terms-notice { opacity: 1; visibility: visible; }
+        .item-card:hover .terms-notice, .item-card:active .terms-notice { opacity: 1; visibility: visible; }
 
         /* --- CONTA --- */
         .auth-card { width: 90%; max-width: 400px; background: #fff; padding: 40px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; text-align: center; }
@@ -98,7 +99,7 @@
         /* --- SOBRE NÓS PREMIUM --- */
         .about-page { width: 92%; max-width: 800px; margin: 40px auto 100px; }
         .about-box { background: #fff; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; margin-bottom: 20px; text-transform: uppercase; text-shadow: 0 0 10px var(--roxo-glow); }
+        .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; text-shadow: 0 0 10px var(--roxo-glow); margin-bottom: 20px; text-transform: uppercase; }
         .premium-title { font-family: 'Poppins'; font-size: 20px; font-weight: 800; color: #111; margin: 60px 0 25px; padding-left: 15px; border-left: 6px solid var(--roxo-neon); text-transform: uppercase; text-align: left; }
         .premium-card { background: #fff; padding: 25px; border-radius: 18px; border: 1px solid #eee; text-align: left; margin-bottom: 15px; }
 
@@ -123,36 +124,35 @@
 <body>
 
     <header>
-        <div id="btn-profile-top" class="profile-trigger" onclick="switchPage(4)"><i class="fa fa-user-circle"></i></div>
+        <div id="btn-profile-top" class="profile-trigger"><i class="fa fa-user-circle"></i></div>
         <nav>
-            <a id="nav-loja" class="active" onclick="switchPage(0)">Loja</a>
-            <a id="nav-feedback" onclick="switchPage(1)">Feedbacks</a>
-            <a id="nav-sobre" onclick="switchPage(2)">Sobre Nós</a>
-            <a id="nav-adm" style="display: none; color: #fff; font-weight: 800;" onclick="switchPage(3)">ADM 🔒</a>
+            <a id="nav-loja" class="active">Loja</a>
+            <a id="nav-feedback">Feedbacks</a>
+            <a id="nav-sobre">Sobre Nós</a>
+            <a id="nav-adm" style="display: none; color: #fff; font-weight: 800;">ADM 🔒</a>
         </nav>
         <h1 class="logo-main">MANGA <span>STORE</span></h1>
         <div class="logo-sub">Volleyball legends, Lucky Spin e diversos</div>
         <div class="search-box"><i class="fa fa-search"></i><input type="text" id="searchInput" placeholder="Buscar produtos..."></div>
     </header>
 
-    <!-- PÁGINAS -->
     <div id="section-loja" class="section-content">
         <div class="categories-wrapper">
             <div class="categories-container">
-                <div class="cat-card active" onclick="setCategory(this, 'all')"><span>✨ All</span></div>
-                <div class="cat-card" onclick="setCategory(this, 'estilos')"><span>👑 Estilos</span></div>
-                <div class="cat-card" onclick="setCategory(this, 'robux')"><span>💎 Robux</span></div>
-                <div class="cat-card" onclick="setCategory(this, 'lucky')"><span>🌀 Lucky Spin</span></div>
-                <div class="cat-card" onclick="setCategory(this, 'slots')"><span>🎰 Slots</span></div>
+                <div class="cat-card active" data-category="all"><span>✨ All</span></div>
+                <div class="cat-card" data-category="estilos"><span>👑 Estilos</span></div>
+                <div class="cat-card" data-category="robux"><span>💎 Robux</span></div>
+                <div class="cat-card" data-category="lucky"><span>🌀 Lucky Spin</span></div>
+                <div class="cat-card" data-category="slots"><span>🎰 Slots</span></div>
             </div>
         </div>
         <div class="price-filter">
             <label>Defina seu orçamento</label>
             <input type="range" min="0" max="1000" value="500" class="slider" id="priceRange">
-            <span class="price-range-text" id="filterLabel">Até R$ 500,00</span>
+            <span class="price-range-text" id="filterLabel">Arraste para filtrar por valor</span>
         </div>
         <div class="product-grid" id="productContainer">
-             <p style="color: #bbb; grid-column: 1/-1; text-align: center; margin-top: 50px;">Carregando sua loja...</p>
+             <p style="color: #bbb; grid-column: 1/-1; text-align: center;">Carregando produtos...</p>
         </div>
     </div>
 
@@ -161,12 +161,12 @@
             <h2>Minha Conta</h2>
             <input type="email" id="user-email" placeholder="E-mail">
             <input type="password" id="user-pass" placeholder="Senha">
-            <button class="btn-auth" onclick="handleAuth()">ENTRAR / CADASTRAR</button>
-            <button class="btn-google-icon" onclick="loginWithGoogle()"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24"></button>
+            <button class="btn-auth" id="btn-login-manual">ENTRAR / CADASTRAR</button>
+            <button class="btn-google-icon" id="btn-google-login"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24"></button>
         </div>
         <div class="auth-card page-hidden" id="user-profile">
             <h2 id="display-user-name">Usuário</h2>
-            <button class="btn-auth" style="background:#ff4d4d;" onclick="logout()">SAIR DA CONTA</button>
+            <button class="btn-auth" id="btn-logout" style="background:#ff4d4d; margin-top: 20px;">SAIR DA CONTA</button>
         </div>
     </div>
 
@@ -174,10 +174,10 @@
         <div class="admin-box">
             <h3 style="text-align: center; margin-bottom: 15px;">Avalie sua compra</h3>
             <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px; color:#ddd; font-size:20px;" id="starRating">
-                <i class="fa fa-star" data-v="1" onclick="setStars(1)"></i><i class="fa fa-star" data-v="2" onclick="setStars(2)"></i><i class="fa fa-star" data-v="3" onclick="setStars(3)"></i><i class="fa fa-star" data-v="4" onclick="setStars(4)"></i><i class="fa fa-star" data-v="5" onclick="setStars(5)"></i>
+                <i class="fa fa-star" data-v="1"></i><i class="fa fa-star" data-v="2"></i><i class="fa fa-star" data-v="3"></i><i class="fa fa-star" data-v="4"></i><i class="fa fa-star" data-v="5"></i>
             </div>
             <textarea id="fbComment" placeholder="Comente aqui..."></textarea>
-            <button class="btn-admin" onclick="sendFeedback()">ENVIAR FEEDBACK</button>
+            <button class="btn-admin" id="btn-send-feedback">ENVIAR FEEDBACK</button>
         </div>
         <div class="product-grid" id="feedbackList"></div>
     </div>
@@ -192,74 +192,79 @@
                     <option value="estilos">Estilos</option><option value="robux">Robux</option><option value="lucky">Lucky Spin</option><option value="slots">Slots</option>
                 </select>
                 <input type="text" id="newProdImg" placeholder="Link da Foto">
-                <input type="text" id="newProdStatus" placeholder="Status (Ex: 10 disponíveis)">
-                <button class="btn-admin" onclick="saveToDatabase()">SALVAR NO BANCO</button>
+                <input type="text" id="newProdStatus" placeholder="Status">
+                <button class="btn-admin" id="btn-save-prod">SALVAR NO BANCO</button>
             </div>
         </div>
     </div>
 
     <div id="section-sobre" class="section-content page-hidden">
         <div class="about-page">
-            <div class="about-box"><h2>Manga Store</h2><p>Liderança e segurança no VBL.</p></div>
+            <div class="about-box"><h2>Manga Store</h2><p>Liderança e segurança no Volleyball Legends.</p></div>
             <div class="premium-title">Compromisso & Diretrizes</div>
-            <div class="premium-card"><h4>Regras</h4><p>Entrega digital imediata. Ao comprar, aceita nossos termos.</p></div>
+            <div class="premium-card"><h4>Regras</h4><p>Entrega digital. Ao comprar, aceita nossos termos.</p></div>
             <div class="premium-title">Dúvidas Frequentes</div>
             <div class="premium-card"><h4>Pagamento</h4><p>Aceitamos apenas PIX no momento.</p></div>
         </div>
     </div>
 
     <div class="float-contact">
-        <div class="btn-wrapper"><div class="custom-tooltip">Ir para Discord</div><a href="https://discord.gg/bgrFPFAX4" target="_blank" class="btn-contact discord"><i class="fab fa-discord"></i></a></div>
-        <div class="btn-wrapper"><div class="custom-tooltip">Suporte WhatsApp</div><a href="https://wa.me/5573981822034" target="_blank" class="btn-contact whatsapp"><i class="fab fa-whatsapp"></i></a></div>
+        <div class="btn-wrapper"><div class="custom-tooltip">Discord</div><a href="https://discord.gg/bgrFPFAX4" target="_blank" class="btn-contact discord"><i class="fab fa-discord"></i></a></div>
+        <div class="btn-wrapper"><div class="custom-tooltip">WhatsApp</div><a href="https://wa.me/5573981822034" target="_blank" class="btn-contact whatsapp"><i class="fab fa-whatsapp"></i></a></div>
     </div>
 
     <footer>MANGA STORE • O IMPÉRIO DO VBL • 2026</footer>
 
     <script>
-        // --- FUNÇÕES DE NAVEGAÇÃO (EXECUTAM PRIMEIRO E NÃO TRAVAM) ---
-        const sections = ['section-loja', 'section-feedback', 'section-sobre', 'section-adm', 'section-auth'];
-        const navIds = ['nav-loja', 'nav-feedback', 'nav-sobre', 'nav-adm', 'btn-profile-top'];
+        // --- PARTE 1: NAVEGAÇÃO E UI (O QUE DESTRAVA O SITE) ---
+        const sections = [
+            document.getElementById('section-loja'),
+            document.getElementById('section-feedback'),
+            document.getElementById('section-sobre'),
+            document.getElementById('section-adm'),
+            document.getElementById('section-auth')
+        ];
+        const navBtns = [
+            document.getElementById('nav-loja'),
+            document.getElementById('nav-feedback'),
+            document.getElementById('nav-sobre'),
+            document.getElementById('nav-adm'),
+            document.getElementById('btn-profile-top')
+        ];
 
         function switchPage(index) {
-            sections.forEach((id, i) => {
-                const el = document.getElementById(id);
-                if(el) el.classList.toggle('page-hidden', i !== index);
-                const btn = document.getElementById(navIds[i]);
-                if(btn && i < 4) btn.classList.toggle('active', i === index);
+            sections.forEach((s, i) => {
+                if(s) s.classList.toggle('page-hidden', i !== index);
+                if(navBtns[i] && i < 4) navBtns[i].classList.toggle('active', i === index);
             });
             window.scrollTo(0,0);
         }
 
-        // --- INICIALIZAÇÃO FIREBASE ---
-        try {
-            const firebaseConfig = {
-                apiKey: "AIzaSyAJpXVl5K_qA-NR3lQQiG9MckonlX9Ds-8",
-                authDomain: "manga-store-5877c.firebaseapp.com",
-                databaseURL: "https://manga-store-5877c-default-rtdb.firebaseio.com",
-                projectId: "manga-store-5877c",
-                storageBucket: "manga-store-5877c.firebasestorage.app",
-                messagingSenderId: "855940003501",
-                appId: "1:855940003501:web:8fbb9c140bcc7236393824"
-            };
-            firebase.initializeApp(firebaseConfig);
-            var db = firebase.database();
-            var auth = firebase.auth();
-        } catch (e) {
-            console.error("Firebase falhou:", e);
-        }
+        // Atribui os cliques da navegação
+        navBtns[0].onclick = () => switchPage(0);
+        navBtns[1].onclick = () => switchPage(1);
+        navBtns[2].onclick = () => switchPage(2);
+        navBtns[3].onclick = () => switchPage(3);
+        navBtns[4].onclick = () => switchPage(4);
 
+        // --- PARTE 2: FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJpXVl5K_qA-NR3lQQiG9MckonlX9Ds-8",
+            authDomain: "manga-store-5877c.firebaseapp.com",
+            databaseURL: "https://manga-store-5877c-default-rtdb.firebaseio.com",
+            projectId: "manga-store-5877c",
+            storageBucket: "manga-store-5877c.firebasestorage.app",
+            messagingSenderId: "855940003501",
+            appId: "1:855940003501:web:8fbb9c140bcc7236393824"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const auth = firebase.auth();
         const ADMIN_EMAIL = "manjmangoo@gmail.com";
-        let isPriceActive = false, currentCategory = "all", selectedStars = 5;
+        let isPriceActive = false, currentCategory = "all";
 
-        // AUTH
-        function loginWithGoogle() { auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()); }
-        function handleAuth() {
-            const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
-            if(!e || !p) return alert("Preencha tudo!");
-            auth.signInWithEmailAndPassword(e, p).catch(() => auth.createUserWithEmailAndPassword(e,p));
-        }
-        function logout() { auth.signOut(); switchPage(0); }
-
+        // Listeners do Auth
         auth.onAuthStateChanged(user => {
             const profileIcon = document.getElementById('btn-profile-top');
             if(user) {
@@ -277,7 +282,11 @@
             }
         });
 
-        // PRODUTOS
-        db.ref('produtos').on('value', snap => {
-            const container = document.getElementById("productContainer"); container.innerHTML = "";
-            if(!snap.exists()) co
+        // Botoes de Login
+        document.getElementById('btn-google-login').onclick = () => auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        document.getElementById('btn-login-manual').onclick = () => {
+            const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
+            if(!e || !p) return alert("Preencha tudo!");
+            auth.signInWithEmailAndPassword(e, p).catch(() => auth.createUserWithEmailAndPassword(e,p));
+        };
+        document.getElementById('btn-logout').onclick = () => auth
