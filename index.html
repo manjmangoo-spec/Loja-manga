@@ -61,17 +61,17 @@
         .categories-wrapper { width: 100%; overflow-x: auto; display: flex; padding: 25px 0; scrollbar-width: none; }
         .categories-wrapper::-webkit-scrollbar { display: none; }
         .categories-container { display: flex; gap: 15px; padding: 0 20px; margin: 0 auto; }
-        .cat-card { background: #fff; padding: 14px 22px; border-radius: 12px; min-width: 100px; text-align: center; cursor: pointer; border: 1px solid #eee; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.3s; }
+        .cat-card { background: #fff; padding: 14px 22px; border-radius: 12px; min-width: 110px; text-align: center; cursor: pointer; border: 1px solid #eee; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.3s; }
         .cat-card.active { border-color: var(--roxo-neon); box-shadow: 0 0 20px var(--roxo-neon); }
         .cat-card span { font-size: 11px; font-weight: 700; color: #444; }
 
-        /* --- FILTRO (FIXED) --- */
+        /* --- FILTRO --- */
         .price-filter { width: 90%; max-width: 450px; margin: 10px auto 40px; padding: 30px 25px; background: #fff; border-radius: 20px; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
         .price-filter label { font-size: 10px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 35px; }
         .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #eee; border-radius: 10px; outline: none; margin: 0; }
         .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
         .slider::-moz-range-thumb { width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
-        .price-range-text { font-size: 15px; font-weight: 800; color: var(--roxo-neon); margin-top: 25px; display: block; }
+        .price-range-text { font-size: 15px; font-weight: 800; color: var(--roxo-neon); margin-top: 25px; }
 
         /* --- PRODUTOS --- */
         .product-grid { width: 92%; max-width: 1000px; margin-bottom: 100px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; }
@@ -87,28 +87,27 @@
         .btn-remove-adm { display: none; background:none; border:none; color:#ff4d4d; font-size:9px; margin-top:10px; cursor:pointer; width:100%; font-weight: bold; }
         body.is-admin .btn-remove-adm { display: block; }
         .terms-notice { font-size: 8px; color: #aaa; text-align: center; margin-top: 5px; font-weight: 600; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .item-card:hover .terms-notice, .item-card:active .terms-notice { opacity: 1; visibility: visible; }
+        .item-card:hover .terms-notice { opacity: 1; visibility: visible; }
 
         /* --- CONTA --- */
         .auth-card { width: 90%; max-width: 400px; background: #fff; padding: 40px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; text-align: center; }
         .auth-card input { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd; font-family: 'Poppins'; }
         .btn-auth { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--roxo-neon); color: #fff; font-weight: 800; cursor: pointer; }
-        .btn-google-icon { width: 55px; height: 55px; margin: 25px auto 0; border-radius: 50%; border: 1px solid #eee; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .btn-google-icon { width: 55px; height: 55px; margin: 25px auto 0; border-radius: 50%; border: 1px solid #eee; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        /* --- SOBRE NÓS --- */
+        /* --- SOBRE NÓS PREMIUM --- */
         .about-page { width: 92%; max-width: 800px; margin: 40px auto 100px; }
         .about-box { background: #fff; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; text-shadow: 0 0 10px var(--roxo-glow); margin-bottom: 20px; text-transform: uppercase; }
+        .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; margin-bottom: 20px; text-transform: uppercase; text-shadow: 0 0 10px var(--roxo-glow); }
         .premium-title { font-family: 'Poppins'; font-size: 20px; font-weight: 800; color: #111; margin: 60px 0 25px; padding-left: 15px; border-left: 6px solid var(--roxo-neon); text-transform: uppercase; text-align: left; }
-        .premium-card { background: #fff; padding: 25px; border-radius: 18px; border: 1px solid #eee; text-align: left; margin-bottom: 15px; transition: 0.3s; }
-        .premium-card:hover { border-color: var(--roxo-neon); box-shadow: 0 0 15px var(--roxo-glow); transform: translateY(-3px); }
+        .premium-card { background: #fff; padding: 25px; border-radius: 18px; border: 1px solid #eee; text-align: left; margin-bottom: 15px; }
 
         /* --- ADM --- */
         .admin-box { width: 90%; max-width: 500px; background: #fff; padding: 30px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; }
         .admin-form input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins'; }
         .btn-admin { width: 100%; padding: 15px; background: var(--preto-fundo); color: #fff; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; }
 
-        /* --- BOTÕES FLUTUANTES --- */
+        /* --- BOTÕES CONTATO --- */
         .float-contact { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 15px; z-index: 999; }
         .btn-wrapper { position: relative; display: flex; align-items: center; }
         .btn-contact { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; cursor: pointer; }
@@ -136,28 +135,27 @@
         <div class="search-box"><i class="fa fa-search"></i><input type="text" id="searchInput" placeholder="Buscar produtos..."></div>
     </header>
 
-    <!-- LOJA -->
+    <!-- PÁGINAS -->
     <div id="section-loja" class="section-content">
         <div class="categories-wrapper">
             <div class="categories-container">
-                <div class="cat-card active" data-category="all" onclick="setCategory(this, 'all')"><span>✨ All</span></div>
-                <div class="cat-card" data-category="estilos" onclick="setCategory(this, 'estilos')"><span>👑 Estilos</span></div>
-                <div class="cat-card" data-category="robux" onclick="setCategory(this, 'robux')"><span>💎 Robux</span></div>
-                <div class="cat-card" data-category="lucky" onclick="setCategory(this, 'lucky')"><span>🌀 Lucky Spin</span></div>
-                <div class="cat-card" data-category="slots" onclick="setCategory(this, 'slots')"><span>🎰 Slots</span></div>
+                <div class="cat-card active" onclick="setCategory(this, 'all')"><span>✨ All</span></div>
+                <div class="cat-card" onclick="setCategory(this, 'estilos')"><span>👑 Estilos</span></div>
+                <div class="cat-card" onclick="setCategory(this, 'robux')"><span>💎 Robux</span></div>
+                <div class="cat-card" onclick="setCategory(this, 'lucky')"><span>🌀 Lucky Spin</span></div>
+                <div class="cat-card" onclick="setCategory(this, 'slots')"><span>🎰 Slots</span></div>
             </div>
         </div>
         <div class="price-filter">
             <label>Defina seu orçamento</label>
-            <input type="range" min="0" max="1000" value="500" class="slider" id="priceRange" oninput="isPriceActive=true; applyFilters()">
-            <span class="price-range-text" id="filterLabel">Arraste para filtrar por valor</span>
+            <input type="range" min="0" max="1000" value="500" class="slider" id="priceRange">
+            <span class="price-range-text" id="filterLabel">Até R$ 500,00</span>
         </div>
         <div class="product-grid" id="productContainer">
-             <p style="color: #bbb; grid-column: 1/-1; text-align: center;">Carregando itens do banco...</p>
+             <p style="color: #bbb; grid-column: 1/-1; text-align: center; margin-top: 50px;">Carregando sua loja...</p>
         </div>
     </div>
 
-    <!-- CONTA -->
     <div id="section-auth" class="section-content page-hidden">
         <div class="auth-card" id="auth-forms">
             <h2>Minha Conta</h2>
@@ -165,7 +163,6 @@
             <input type="password" id="user-pass" placeholder="Senha">
             <button class="btn-auth" onclick="handleAuth()">ENTRAR / CADASTRAR</button>
             <button class="btn-google-icon" onclick="loginWithGoogle()"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24"></button>
-            <p style="font-size: 11px; color: #888; margin-top: 15px;">Dica: Use manjmangoo@gmail.com para ser ADM.</p>
         </div>
         <div class="auth-card page-hidden" id="user-profile">
             <h2 id="display-user-name">Usuário</h2>
@@ -173,44 +170,41 @@
         </div>
     </div>
 
-    <!-- FEEDBACK -->
     <div id="section-feedback" class="section-content page-hidden">
         <div class="admin-box">
             <h3 style="text-align: center; margin-bottom: 15px;">Avalie sua compra</h3>
             <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px; color:#ddd; font-size:20px;" id="starRating">
                 <i class="fa fa-star" data-v="1" onclick="setStars(1)"></i><i class="fa fa-star" data-v="2" onclick="setStars(2)"></i><i class="fa fa-star" data-v="3" onclick="setStars(3)"></i><i class="fa fa-star" data-v="4" onclick="setStars(4)"></i><i class="fa fa-star" data-v="5" onclick="setStars(5)"></i>
             </div>
-            <textarea id="fbComment" placeholder="O que achou dos itens?"></textarea>
+            <textarea id="fbComment" placeholder="Comente aqui..."></textarea>
             <button class="btn-admin" onclick="sendFeedback()">ENVIAR FEEDBACK</button>
         </div>
         <div class="product-grid" id="feedbackList"></div>
     </div>
 
-    <!-- ADM -->
     <div id="section-adm" class="section-content page-hidden">
         <div class="admin-box">
             <h2>Gerenciar Loja</h2>
             <div class="admin-form">
-                <input type="text" id="newProdName" placeholder="Nome do Item">
+                <input type="text" id="newProdName" placeholder="Nome">
                 <input type="number" id="newProdPrice" placeholder="Preço">
                 <select id="newProdCat">
                     <option value="estilos">Estilos</option><option value="robux">Robux</option><option value="lucky">Lucky Spin</option><option value="slots">Slots</option>
                 </select>
                 <input type="text" id="newProdImg" placeholder="Link da Foto">
-                <input type="text" id="newProdStatus" placeholder="Ex: 10 disponíveis">
-                <button class="btn-admin" onclick="saveToDatabase()">SALVAR NO FIREBASE</button>
+                <input type="text" id="newProdStatus" placeholder="Status (Ex: 10 disponíveis)">
+                <button class="btn-admin" onclick="saveToDatabase()">SALVAR NO BANCO</button>
             </div>
         </div>
     </div>
 
-    <!-- SOBRE -->
     <div id="section-sobre" class="section-content page-hidden">
         <div class="about-page">
-            <div class="about-box"><h2>Manga Store</h2><p>Segurança e qualidade premium no VBL.</p></div>
+            <div class="about-box"><h2>Manga Store</h2><p>Liderança e segurança no VBL.</p></div>
             <div class="premium-title">Compromisso & Diretrizes</div>
-            <div class="premium-card"><h4>Entrega Digital</h4><p>Ao comprar, você aceita nossos termos.</p></div>
+            <div class="premium-card"><h4>Regras</h4><p>Entrega digital imediata. Ao comprar, aceita nossos termos.</p></div>
             <div class="premium-title">Dúvidas Frequentes</div>
-            <div class="premium-card"><h4>Pagamento</h4><p>Apenas PIX no momento para rapidez total.</p></div>
+            <div class="premium-card"><h4>Pagamento</h4><p>Aceitamos apenas PIX no momento.</p></div>
         </div>
     </div>
 
@@ -222,24 +216,7 @@
     <footer>MANGA STORE • O IMPÉRIO DO VBL • 2026</footer>
 
     <script>
-        // CONFIG FIREBASE
-        const firebaseConfig = {
-            apiKey: "AIzaSyAJpXVl5K_qA-NR3lQQiG9MckonlX9Ds-8",
-            authDomain: "manga-store-5877c.firebaseapp.com",
-            databaseURL: "https://manga-store-5877c-default-rtdb.firebaseio.com",
-            projectId: "manga-store-5877c",
-            storageBucket: "manga-store-5877c.firebasestorage.app",
-            messagingSenderId: "855940003501",
-            appId: "1:855940003501:web:8fbb9c140bcc7236393824"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-        const auth = firebase.auth();
-
-        const ADMIN_EMAIL = "manjmangoo@gmail.com";
-        let isPriceActive = false, currentCategory = "all", selectedStars = 5;
-
-        // --- NAVEGAÇÃO À PROVA DE ERROS ---
+        // --- FUNÇÕES DE NAVEGAÇÃO (EXECUTAM PRIMEIRO E NÃO TRAVAM) ---
         const sections = ['section-loja', 'section-feedback', 'section-sobre', 'section-adm', 'section-auth'];
         const navIds = ['nav-loja', 'nav-feedback', 'nav-sobre', 'nav-adm', 'btn-profile-top'];
 
@@ -247,14 +224,34 @@
             sections.forEach((id, i) => {
                 const el = document.getElementById(id);
                 if(el) el.classList.toggle('page-hidden', i !== index);
-                
                 const btn = document.getElementById(navIds[i]);
-                if(btn) btn.classList.toggle('active', i === index);
+                if(btn && i < 4) btn.classList.toggle('active', i === index);
             });
             window.scrollTo(0,0);
         }
 
-        // --- AUTH ---
+        // --- INICIALIZAÇÃO FIREBASE ---
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyAJpXVl5K_qA-NR3lQQiG9MckonlX9Ds-8",
+                authDomain: "manga-store-5877c.firebaseapp.com",
+                databaseURL: "https://manga-store-5877c-default-rtdb.firebaseio.com",
+                projectId: "manga-store-5877c",
+                storageBucket: "manga-store-5877c.firebasestorage.app",
+                messagingSenderId: "855940003501",
+                appId: "1:855940003501:web:8fbb9c140bcc7236393824"
+            };
+            firebase.initializeApp(firebaseConfig);
+            var db = firebase.database();
+            var auth = firebase.auth();
+        } catch (e) {
+            console.error("Firebase falhou:", e);
+        }
+
+        const ADMIN_EMAIL = "manjmangoo@gmail.com";
+        let isPriceActive = false, currentCategory = "all", selectedStars = 5;
+
+        // AUTH
         function loginWithGoogle() { auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()); }
         function handleAuth() {
             const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
@@ -269,9 +266,18 @@
                 profileIcon.innerHTML = user.photoURL ? `<img src="${user.photoURL}">` : `<i class="fa fa-user-check"></i>`;
                 document.getElementById('auth-forms').classList.add('page-hidden');
                 document.getElementById('user-profile').classList.remove('page-hidden');
-                document.getElementById('display-user-name').innerText = (user.email === ADMIN_EMAIL) ? "ADM" : (user.displayName || user.email.split('@')[0]);
+                document.getElementById('display-user-name').innerText = (user.email === ADMIN_EMAIL) ? "Olá, ADM" : "Olá, " + (user.displayName || user.email.split('@')[0]);
                 if(user.email === ADMIN_EMAIL) { document.getElementById('nav-adm').style.display = "block"; document.body.classList.add('is-admin'); }
             } else {
                 profileIcon.innerHTML = `<i class="fa fa-user-circle"></i>`;
                 document.getElementById('auth-forms').classList.remove('page-hidden');
-                document.getElementById('use
+                document.getElementById('user-profile').classList.add('page-hidden');
+                document.getElementById('nav-adm').style.display = "none";
+                document.body.classList.remove('is-admin');
+            }
+        });
+
+        // PRODUTOS
+        db.ref('produtos').on('value', snap => {
+            const container = document.getElementById("productContainer"); container.innerHTML = "";
+            if(!snap.exists()) co
