@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Manga Store | Premium</title>
     
+    <!-- Fontes e Ícones -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- SDK DO FIREBASE -->
+    <!-- SDK DO FIREBASE -->""
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -23,17 +24,18 @@
             --discord: #5865F2;
         }
 
-        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; background-color: var(--cinza-fundo); font-family: 'Poppins', sans-serif; }
+        * { box-sizing: border-box; outline: none; }
+        html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; background-color: var(--cinza-fundo); font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
-        /* --- PERFIL --- */
+        /* --- BOTÃO DE PERFIL (AVATAR) --- */
         .profile-trigger {
             position: absolute; top: 20px; right: 20px;
             width: 45px; height: 45px; background: #111;
             border-radius: 50%; border: 1px solid var(--roxo-neon);
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 0 10px var(--roxo-glow); z-index: 1000; overflow: hidden;
+            cursor: pointer; box-shadow: 0 0 10px var(--roxo-glow); z-index: 1000;
+            overflow: hidden;
         }
         .profile-trigger img { width: 100%; height: 100%; object-fit: cover; }
         .profile-trigger i { color: #fff; font-size: 18px; }
@@ -64,14 +66,12 @@
         .cat-card.active { border-color: var(--roxo-neon); box-shadow: 0 0 20px var(--roxo-neon); }
         .cat-card span { font-size: 11px; font-weight: 700; color: #444; }
 
-        /* --- FILTRO (CORREÇÃO DE BUG AZUL) --- */
+        /* --- FILTRO --- */
         .price-filter { width: 90%; max-width: 450px; margin: 10px auto 40px; padding: 30px 25px; background: #fff; border-radius: 20px; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
         .price-filter label { font-size: 10px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 35px; }
-        
-        .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #eee; border-radius: 10px; outline: none; margin: 0; }
-        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
+        .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; background: #eee; border-radius: 10px; outline: none; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
         .slider::-moz-range-thumb { width: 28px; height: 28px; background: var(--roxo-neon); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 15px var(--roxo-glow); cursor: pointer; }
-        
         .price-range-text { font-size: 15px; font-weight: 800; color: var(--roxo-neon); margin-top: 25px; }
 
         /* --- PRODUTOS --- */
@@ -79,6 +79,7 @@
         .item-card { background: #fff; border-radius: 18px; padding: 20px; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.02); animation: fadeIn 0.5s ease forwards; transition: 0.3s; display: flex; flex-direction: column; gap: 15px; }
         .item-card:hover { transform: translateY(-5px); border-color: var(--roxo-neon); }
         .item-hidden { display: none !important; }
+
         .card-main-info { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .info-left h3 { margin: 5px 0; font-size: 16px; font-weight: 700; color: #111; }
         .price-tag { font-size: 20px; font-weight: 700; color: #000; display: block; margin-top: 5px; }
@@ -88,19 +89,32 @@
         .btn-remove-adm { display: none; background:none; border:none; color:#ff4d4d; font-size:9px; margin-top:10px; cursor:pointer; width:100%; font-weight: bold; }
         body.is-admin .btn-remove-adm { display: block; }
         .terms-notice { font-size: 8px; color: #aaa; text-align: center; margin-top: 5px; font-weight: 600; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .item-card:hover .terms-notice, .item-card:active .terms-notice { opacity: 1; visibility: visible; }
+        .item-card:hover .terms-notice { opacity: 1; visibility: visible; }
 
-        /* --- CONTA --- */
-        .auth-card { width: 90%; max-width: 400px; background: #fff; padding: 40px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; text-align: center; }
+        /* --- LOGIN / CONTA --- */
+        .auth-card { width: 90%; max-width: 400px; background: #fff; padding: 40px; border-radius: 20px; margin: 40px auto; border: 1px solid #eee; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .auth-card h2 { font-family: 'Playfair Display'; color: #111; margin-bottom: 25px; font-size: 26px; }
         .auth-card input { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd; font-family: 'Poppins'; }
-        .btn-auth { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--roxo-neon); color: #fff; font-weight: 800; cursor: pointer; }
-        .btn-google-icon { width: 55px; height: 55px; margin: 25px auto 0; border-radius: 50%; border: 1px solid #eee; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .btn-auth { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--roxo-neon); color: #fff; font-weight: 800; cursor: pointer; box-shadow: 0 5px 15px var(--roxo-glow); }
+        
+        /* Botão Google Minimalista (Apenas Ícone) */
+        .btn-google-icon { 
+            width: 55px; height: 55px; margin: 25px auto 0; border-radius: 50%; 
+            border: 1px solid #eee; background: #fff; cursor: pointer; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s;
+        }
+        .btn-google-icon:hover { transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn-google-icon img { width: 24px; }
 
-        /* --- SOBRE NÓS PREMIUM --- */
+        .auth-toggle { margin-top: 25px; font-size: 13px; color: #888; cursor: pointer; }
+        .auth-toggle b { color: var(--roxo-neon); }
+
+        /* --- SOBRE NÓS --- */
         .about-page { width: 92%; max-width: 800px; margin: 40px auto 100px; }
         .about-box { background: #fff; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
         .about-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--roxo-neon) !important; text-shadow: 0 0 10px var(--roxo-glow); margin-bottom: 20px; text-transform: uppercase; }
-        .premium-title { font-family: 'Poppins'; font-size: 20px; font-weight: 800; color: #111; margin: 60px 0 25px; padding-left: 15px; border-left: 6px solid var(--roxo-neon); text-transform: uppercase; text-align: left; }
+        .premium-title { font-family: 'Poppins'; font-size: 22px; font-weight: 800; color: #111; margin: 60px 0 30px; padding-left: 15px; border-left: 6px solid var(--roxo-neon); text-transform: uppercase; text-align: left; }
         .premium-card { background: #fff; padding: 25px; border-radius: 18px; border: 1px solid #eee; text-align: left; margin-bottom: 15px; }
 
         /* --- ADM --- */
@@ -108,7 +122,7 @@
         .admin-form input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins'; }
         .btn-admin { width: 100%; padding: 15px; background: var(--preto-fundo); color: #fff; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; }
 
-        /* --- BOTÕES CONTATO --- */
+        /* --- BOTÕES FLUTUANTES --- */
         .float-contact { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 15px; z-index: 999; }
         .btn-wrapper { position: relative; display: flex; align-items: center; }
         .btn-contact { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; cursor: pointer; }
@@ -136,6 +150,7 @@
         <div class="search-box"><i class="fa fa-search"></i><input type="text" id="searchInput" placeholder="Buscar produtos..."></div>
     </header>
 
+    <!-- LOJA -->
     <div id="section-loja" class="section-content">
         <div class="categories-wrapper">
             <div class="categories-container">
@@ -148,28 +163,35 @@
         </div>
         <div class="price-filter">
             <label>Defina seu orçamento</label>
-            <input type="range" min="0" max="1000" value="500" class="slider" id="priceRange">
+            <input type="range" min="0" max="1000" value="1000" class="slider" id="priceRange">
             <span class="price-range-text" id="filterLabel">Arraste para filtrar por valor</span>
         </div>
-        <div class="product-grid" id="productContainer">
-             <p style="color: #bbb; grid-column: 1/-1; text-align: center;">Carregando produtos...</p>
-        </div>
+        <div class="product-grid" id="productContainer"></div>
     </div>
 
+    <!-- CONTA -->
     <div id="section-auth" class="section-content page-hidden">
         <div class="auth-card" id="auth-forms">
-            <h2>Minha Conta</h2>
+            <h2 id="auth-title">Minha Conta</h2>
             <input type="email" id="user-email" placeholder="E-mail">
             <input type="password" id="user-pass" placeholder="Senha">
-            <button class="btn-auth" id="btn-login-manual">ENTRAR / CADASTRAR</button>
-            <button class="btn-google-icon" id="btn-google-login"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24"></button>
+            <button class="btn-auth" id="btn-auth-action" onclick="handleAuth()">ENTRAR</button>
+            
+            <!-- Botão Google Apenas Ícone -->
+            <button class="btn-google-icon" onclick="loginWithGoogle()" title="Entrar com Google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+            </button>
+            
+            <div class="auth-toggle" onclick="toggleAuthMode()">Não tem conta? <b>Crie agora</b></div>
         </div>
         <div class="auth-card page-hidden" id="user-profile">
-            <h2 id="display-user-name">Usuário</h2>
-            <button class="btn-auth" id="btn-logout" style="background:#ff4d4d; margin-top: 20px;">SAIR DA CONTA</button>
+            <h2>Olá, <span id="display-user-name">...</span></h2>
+            <p style="color: #888; font-size: 13px; margin-bottom: 25px;">Sessão ativa na Manga Store.</p>
+            <button class="btn-auth" style="background:#ff4d4d;" onclick="logout()">SAIR DA CONTA</button>
         </div>
     </div>
 
+    <!-- FEEDBACK -->
     <div id="section-feedback" class="section-content page-hidden">
         <div class="admin-box">
             <h3 style="text-align: center; margin-bottom: 15px;">Avalie sua compra</h3>
@@ -177,11 +199,12 @@
                 <i class="fa fa-star" data-v="1"></i><i class="fa fa-star" data-v="2"></i><i class="fa fa-star" data-v="3"></i><i class="fa fa-star" data-v="4"></i><i class="fa fa-star" data-v="5"></i>
             </div>
             <textarea id="fbComment" placeholder="Comente aqui..."></textarea>
-            <button class="btn-admin" id="btn-send-feedback">ENVIAR FEEDBACK</button>
+            <button class="btn-admin" onclick="sendFeedback()">ENVIAR FEEDBACK</button>
         </div>
         <div class="product-grid" id="feedbackList"></div>
     </div>
 
+    <!-- ADM -->
     <div id="section-adm" class="section-content page-hidden">
         <div class="admin-box">
             <h2>Gerenciar Loja</h2>
@@ -193,18 +216,19 @@
                 </select>
                 <input type="text" id="newProdImg" placeholder="Link da Foto">
                 <input type="text" id="newProdStatus" placeholder="Status">
-                <button class="btn-admin" id="btn-save-prod">SALVAR NO BANCO</button>
+                <button class="btn-admin" onclick="saveToDatabase()">SALVAR PRODUTO</button>
             </div>
         </div>
     </div>
 
+    <!-- SOBRE -->
     <div id="section-sobre" class="section-content page-hidden">
         <div class="about-page">
-            <div class="about-box"><h2>Manga Store</h2><p>Liderança e segurança no Volleyball Legends.</p></div>
+            <div class="about-box"><h2>Manga Store</h2><p>Segurança e qualidade premium no Volleyball Legends.</p></div>
             <div class="premium-title">Compromisso & Diretrizes</div>
-            <div class="premium-card"><h4>Regras</h4><p>Entrega digital. Ao comprar, aceita nossos termos.</p></div>
+            <div class="premium-card"><h4>Entrega Digital</h4><p>Ao comprar, você concorda com nossos termos.</p></div>
             <div class="premium-title">Dúvidas Frequentes</div>
-            <div class="premium-card"><h4>Pagamento</h4><p>Aceitamos apenas PIX no momento.</p></div>
+            <div class="premium-card"><h4>Pagamentos</h4><p>Aceitamos apenas PIX no momento.</p></div>
         </div>
     </div>
 
@@ -216,38 +240,7 @@
     <footer>MANGA STORE • O IMPÉRIO DO VBL • 2026</footer>
 
     <script>
-        // --- PARTE 1: NAVEGAÇÃO E UI (O QUE DESTRAVA O SITE) ---
-        const sections = [
-            document.getElementById('section-loja'),
-            document.getElementById('section-feedback'),
-            document.getElementById('section-sobre'),
-            document.getElementById('section-adm'),
-            document.getElementById('section-auth')
-        ];
-        const navBtns = [
-            document.getElementById('nav-loja'),
-            document.getElementById('nav-feedback'),
-            document.getElementById('nav-sobre'),
-            document.getElementById('nav-adm'),
-            document.getElementById('btn-profile-top')
-        ];
-
-        function switchPage(index) {
-            sections.forEach((s, i) => {
-                if(s) s.classList.toggle('page-hidden', i !== index);
-                if(navBtns[i] && i < 4) navBtns[i].classList.toggle('active', i === index);
-            });
-            window.scrollTo(0,0);
-        }
-
-        // Atribui os cliques da navegação
-        navBtns[0].onclick = () => switchPage(0);
-        navBtns[1].onclick = () => switchPage(1);
-        navBtns[2].onclick = () => switchPage(2);
-        navBtns[3].onclick = () => switchPage(3);
-        navBtns[4].onclick = () => switchPage(4);
-
-        // --- PARTE 2: FIREBASE ---
+        // CONFIG FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyAJpXVl5K_qA-NR3lQQiG9MckonlX9Ds-8",
             authDomain: "manga-store-5877c.firebaseapp.com",
@@ -257,22 +250,43 @@
             messagingSenderId: "855940003501",
             appId: "1:855940003501:web:8fbb9c140bcc7236393824"
         };
-
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
         const auth = firebase.auth();
-        const ADMIN_EMAIL = "manjmangoo@gmail.com";
-        let isPriceActive = false, currentCategory = "all";
 
-        // Listeners do Auth
+        const ADMIN_EMAIL = "manjmangoo@gmail.com";
+        let isLoginMode = true;
+        let isPriceActive = false;
+
+        function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).catch(e => alert(e.message));
+        }
+
+        function handleAuth() {
+            const e = document.getElementById('user-email').value;
+            const p = document.getElementById('user-pass').value;
+            if(!e || !p) return alert("Preencha os campos!");
+            if(isLoginMode) auth.signInWithEmailAndPassword(e, p).catch(err => alert(err.message));
+            else auth.createUserWithEmailAndPassword(e, p).then(() => alert("Conta Criada!")).catch(err => alert(err.message));
+        }
+
+        function logout() { auth.signOut(); switchPage(0); }
+
         auth.onAuthStateChanged(user => {
             const profileIcon = document.getElementById('btn-profile-top');
+            const welcomeText = document.getElementById('display-user-name');
             if(user) {
                 profileIcon.innerHTML = user.photoURL ? `<img src="${user.photoURL}">` : `<i class="fa fa-user-check"></i>`;
                 document.getElementById('auth-forms').classList.add('page-hidden');
                 document.getElementById('user-profile').classList.remove('page-hidden');
-                document.getElementById('display-user-name').innerText = (user.email === ADMIN_EMAIL) ? "Olá, ADM" : "Olá, " + (user.displayName || user.email.split('@')[0]);
-                if(user.email === ADMIN_EMAIL) { document.getElementById('nav-adm').style.display = "block"; document.body.classList.add('is-admin'); }
+                if(user.email === ADMIN_EMAIL) {
+                    welcomeText.innerText = "ADM";
+                    document.getElementById('nav-adm').style.display = "block";
+                    document.body.classList.add('is-admin');
+                } else {
+                    welcomeText.innerText = user.displayName || user.email.split('@')[0];
+                }
             } else {
                 profileIcon.innerHTML = `<i class="fa fa-user-circle"></i>`;
                 document.getElementById('auth-forms').classList.remove('page-hidden');
@@ -282,11 +296,5 @@
             }
         });
 
-        // Botoes de Login
-        document.getElementById('btn-google-login').onclick = () => auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-        document.getElementById('btn-login-manual').onclick = () => {
-            const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
-            if(!e || !p) return alert("Preencha tudo!");
-            auth.signInWithEmailAndPassword(e, p).catch(() => auth.createUserWithEmailAndPassword(e,p));
-        };
-        document.getElementById('btn-logout').onclick = () => auth
+        // PRODUTOS
+        db.r
